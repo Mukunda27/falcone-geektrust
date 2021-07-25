@@ -32,7 +32,7 @@ function MissionDescription() {
       </MissionTitle>
       <span> Mission: </span>
       <ul>{missionListItems}</ul>
-      <Button to="mission"> Launch Mission </Button>
+      <Button to="mission"> Start Mission </Button>
     </Wrapper>
   );
 }
@@ -46,6 +46,7 @@ const Wrapper = styled(VerFlexContainer)`
   flex-basis: 100%;
   color: var(--color-text);
   padding: 2rem;
+  max-width: 650px;
   gap: 1rem;
 
   span {
@@ -79,7 +80,8 @@ const Wrapper = styled(VerFlexContainer)`
 
   @media screen and (min-width: ${stylesConfig.breakpoint.lg}px) {
     flex-basis: 50%;
-    padding: 2rem 7.5rem;
+    padding: 2rem 4rem;
+    max-width: initial;
   }
 `;
 

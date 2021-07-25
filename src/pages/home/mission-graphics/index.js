@@ -19,7 +19,9 @@ const Wrapper = styled.div`
 `;
 
 function MissionGraphics() {
-  const svgElements = svgConfig.map((item) => <SvgWrapper config={item} />);
+  const svgElements = svgConfig.map((item) => (
+    <SvgWrapper key={item.id} config={item} />
+  ));
 
   return <Wrapper> {svgElements} </Wrapper>;
 }

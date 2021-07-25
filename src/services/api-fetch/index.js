@@ -7,9 +7,13 @@ export async function fetchItems(apiUrl) {
     const response = await fetch(apiUrl);
     if (response.ok) {
       const data = await response.json();
-      return { data };
+      return data.map((item, index) => ({
+        id: index,
+        ...item,
+        name: item.name.toLowerCase(),
+      }));
     } else {
-      return { data: [] };
+      throw Error(`Errored Response received from ${apiUrl}`);
     }
   } catch (err) {
     console.error(err);

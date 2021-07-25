@@ -7,21 +7,17 @@ export const getAllPlanetsAsync = createAsyncThunk(
   "planets/getAllPlanetsAsync",
   async () => {
     const data = await fetchItems(PLANETS_API);
-    return data;
+    return { data };
   }
 );
 
 const planetsSlice = createSlice({
   name: "planets",
-  initialState: {
-    planets: [],
-    selected: [],
-  },
+  initialState: [],
   reducers: {},
   extraReducers: {
     [getAllPlanetsAsync.fulfilled]: (state, action) => {
-      state.planets = [...action.payload.data];
-      return state;
+      return action.payload.data;
     },
   },
 });

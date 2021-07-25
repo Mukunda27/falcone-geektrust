@@ -7,21 +7,17 @@ export const getAllVehiclesAsync = createAsyncThunk(
   "vehicles/getAllVehiclesAsync",
   async () => {
     const data = await fetchItems(VEHICLES_API);
-    return data;
+    return { data };
   }
 );
 
 const vehiclesSlice = createSlice({
   name: "planets",
-  initialState: {
-    vehicles: [],
-    selected: [],
-  },
+  initialState: [],
   reducers: {},
   extraReducers: {
     [getAllVehiclesAsync.fulfilled]: (state, action) => {
-      state.vehicles = [...action.payload.data];
-      return state;
+      return action.payload.data;
     },
   },
 });
