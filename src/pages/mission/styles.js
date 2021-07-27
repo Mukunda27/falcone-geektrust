@@ -5,16 +5,17 @@ import { ReactComponent as Ufo } from "../../assets/ufo-hover.svg";
 const FlexIndicator = styled(VerFlexContainer)`
   flex-grow: 1;
   width: 100%;
-  place-items: center;
+  padding: 0 2rem;
+  align-items: center;
 `;
 
 const float = keyframes`
   from {
-    transform: translate(-250%, 0);
+    transform: translate(-100%, 0);
   }
 
   to {
-    transform: translate(250%, 0);
+    transform: translate(100%, 0);
   }
 `;
 
@@ -25,10 +26,24 @@ export const MissionTitle = styled.h1`
   font-weight: var(--font-weight-bold);
 `;
 
+export const TimeIndicator = styled(HorFlexContainer)`
+  padding: 2rem;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 100px;
+
+  h2 {
+    color: var(--color-text);
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-bold);
+  }
+`;
+
 export const ButtonGroup = styled(HorFlexContainer)`
   padding: 2rem;
   justify-content: space-around;
   width: 100%;
+  margin-bottom: 100px;
 `;
 
 export const Button = styled.button`
@@ -72,9 +87,9 @@ export const Button = styled.button`
 
 export const LoadingIndicator = styled(FlexIndicator)`
   svg {
-    width: 10%;
+    width: 20%;
     height: auto;
-    animation: ${float} 2s linear infinite alternate;
+    animation: ${float} 1s linear infinite alternate;
   }
 `;
 
@@ -83,6 +98,9 @@ export const MessageIndicator = styled(FlexIndicator)`
     color: var(--color-text);
     font-size: 1.25rem;
     font-weight: var(--font-weight-bold);
+  }
+
+  button {
   }
 `;
 
@@ -119,10 +137,7 @@ export function createFailureIndicator() {
 export function createSuccessIndicator() {
   const success = (
     <MessageIndicator>
-      <h2>
-        Success ✨. You were successful in finding the hiding place of Queen Al
-        Falcone
-      </h2>
+      <h2>Success ✨. You have found the hiding place of Queen Al Falcone</h2>
     </MessageIndicator>
   );
 

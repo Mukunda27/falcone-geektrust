@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 
 import Navbar from "../../components/navbar";
 import FlexGrid from "../../components/flex-grid";
 import DestinationCard from "../../components/destimation-card";
 
+import upperFirst from "lodash/upperFirst";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { clearSelection } from "../../redux/selectionSlice";
@@ -17,6 +18,7 @@ import {
   MissionTitle,
   ButtonGroup,
   Button,
+  TimeIndicator,
   createLoadingIndicator,
   createErrorIndicator,
   createFailureIndicator,
@@ -38,6 +40,10 @@ function Mission() {
   const [error, setError] = useState(false);
   const selectionInfo = useSelector((state) => state.selection);
   const dispatch = useDispatch();
+
+  useLayoutEffect(() => {
+    window.scrollTo({ left: 0, top: 0 });
+  }, [loading, result, error]);
 
   const destinationCards = destinations.map((des) => (
     <DestinationCard id={des.id} key={des.id} />
@@ -112,6 +118,10 @@ function Mission() {
             Select the planets that you want to search
           </MissionTitle>
           <FlexGrid style={gridStyles}>{destinationCards} </FlexGrid>
+          <TimeIndicator>
+            <h2>Time Taken: {getTotalTime(selectionInfo)} hours </h2>
+          </TimeIndicator>
+
           <ButtonGroup>
             <Button onClick={launchMission} disabled={!isValidSelection}>
               Launch
@@ -199,11 +209,27 @@ function getAllSelectedItems(selectionInfo, section) {
   const selectionValues = Object.values(selectionInfo);
   for (let value of selectionValues) {
     if (value[section]) {
-      names.push(value[section].name);
+      names.push(upperFirst(value[section].name));
     }
   }
 
   return names;
+}
+
+function getTotalTime(selectionInfo) {
+  let time = 0;
+  const selectionValues = Object.values(selectionInfo);
+  for (let value of selectionValues) {
+    if (value[PLANETS_SECTION] && value[VEHICLES_SECTION]) {
+      time += parseFloat(
+        (
+          value[PLANETS_SECTION].distance / value[VEHICLES_SECTION].speed
+        ).toFixed(2)
+      );
+    }
+  }
+
+  return time;
 }
 
 const flexContainerStyles = {
