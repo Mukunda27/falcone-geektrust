@@ -57,7 +57,7 @@ These are the requirements:
 
 ### Links
 
-- Live Site URL: [https://admin-ui-geektrust-mukunda.netlify.app]
+- Live Site URL: [https://finding-falcone-mukunda.netlify.app]
 - GitHub repository URL: [https://github.com/Mukunda27/falcone-geektrust]
 
 ## My process
